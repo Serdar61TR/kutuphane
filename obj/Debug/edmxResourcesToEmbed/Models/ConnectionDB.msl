@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="denemeModelConnectionDbStoreContainer" CdmEntityContainer="denemeEntitiesConnectionDb">
+    <EntitySetMapping Name="emanetler">
+      <EntityTypeMapping TypeName="denemeModelConnectionDb.emanetler">
+        <MappingFragment StoreEntitySet="emanetler">
+          <ScalarProperty Name="alici" ColumnName="alici" />
+          <ScalarProperty Name="alici_tc" ColumnName="alici_tc" />
+          <ScalarProperty Name="alici_tel" ColumnName="alici_tel" />
+          <ScalarProperty Name="kitap" ColumnName="kitap" />
+          <ScalarProperty Name="isbn_no" ColumnName="isbn_no" />
+          <ScalarProperty Name="yazari" ColumnName="yazari" />
+          <ScalarProperty Name="cevirmen" ColumnName="cevirmen" />
+          <ScalarProperty Name="kategori" ColumnName="kategori" />
+          <ScalarProperty Name="alim_tarihi" ColumnName="alim_tarihi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="kitaplar">
+      <EntityTypeMapping TypeName="denemeModelConnectionDb.kitaplar">
+        <MappingFragment StoreEntitySet="kitaplar">
+          <ScalarProperty Name="kitap_adi" ColumnName="kitap_adi" />
+          <ScalarProperty Name="yayin_evi" ColumnName="yayin_evi" />
+          <ScalarProperty Name="isbn" ColumnName="isbn" />
+          <ScalarProperty Name="yazar" ColumnName="yazar" />
+          <ScalarProperty Name="turu" ColumnName="turu" />
+          <ScalarProperty Name="rafno" ColumnName="rafno" />
+          <ScalarProperty Name="cevirmen" ColumnName="cevirmen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="kullanicilar">
+      <EntityTypeMapping TypeName="denemeModelConnectionDb.kullanicilar">
+        <MappingFragment StoreEntitySet="kullanicilar">
+          <ScalarProperty Name="rol" ColumnName="rol" />
+          <ScalarProperty Name="ad_soyad" ColumnName="ad_soyad" />
+          <ScalarProperty Name="sifre" ColumnName="sifre" />
+          <ScalarProperty Name="eposta" ColumnName="eposta" />
+          <ScalarProperty Name="tc" ColumnName="tc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="denemeModelConnectionDb.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="uyeler">
+      <EntityTypeMapping TypeName="denemeModelConnectionDb.uyeler">
+        <MappingFragment StoreEntitySet="uyeler">
+          <ScalarProperty Name="tc" ColumnName="tc" />
+          <ScalarProperty Name="ad_soyad" ColumnName="ad_soyad" />
+          <ScalarProperty Name="d_tarihi" ColumnName="d_tarihi" />
+          <ScalarProperty Name="cinsiyet" ColumnName="cinsiyet" />
+          <ScalarProperty Name="tel" ColumnName="tel" />
+          <ScalarProperty Name="adres" ColumnName="adres" />
+          <ScalarProperty Name="eposta" ColumnName="eposta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="dergiler">
+      <EntityTypeMapping TypeName="denemeModelConnectionDb.dergiler">
+        <MappingFragment StoreEntitySet="dergiler">
+          <ScalarProperty Name="issn" ColumnName="issn" />
+          <ScalarProperty Name="dergi_adi" ColumnName="dergi_adi" />
+          <ScalarProperty Name="dili" ColumnName="dili" />
+          <ScalarProperty Name="yayin_tarihi" ColumnName="yayin_tarihi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

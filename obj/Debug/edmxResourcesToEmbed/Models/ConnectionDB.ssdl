@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="denemeModelConnectionDb.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'deneme.dbo.dergiler' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="dergiler">
+    <Key>
+      <PropertyRef Name="issn" />
+    </Key>
+    <Property Name="issn" Type="bigint" Nullable="false" />
+    <Property Name="dergi_adi" Type="varchar" MaxLength="50" />
+    <Property Name="dili" Type="varchar" MaxLength="50" />
+    <Property Name="yayin_tarihi" Type="date" />
+  </EntityType>
+  <EntityType Name="emanetler">
+    <Key>
+      <PropertyRef Name="isbn_no" />
+    </Key>
+    <Property Name="alici" Type="varchar" MaxLength="50" />
+    <Property Name="alici_tc" Type="bigint" />
+    <Property Name="alici_tel" Type="bigint" />
+    <Property Name="kitap" Type="varchar" MaxLength="50" />
+    <Property Name="isbn_no" Type="bigint" Nullable="false" />
+    <Property Name="yazari" Type="varchar" MaxLength="50" />
+    <Property Name="cevirmen" Type="varchar" MaxLength="50" />
+    <Property Name="kategori" Type="varchar" MaxLength="50" />
+    <Property Name="alim_tarihi" Type="date" />
+  </EntityType>
+  <EntityType Name="kitaplar">
+    <Key>
+      <PropertyRef Name="isbn" />
+    </Key>
+    <Property Name="kitap_adi" Type="varchar" MaxLength="50" />
+    <Property Name="yayin_evi" Type="varchar" MaxLength="50" />
+    <Property Name="isbn" Type="bigint" Nullable="false" />
+    <Property Name="yazar" Type="varchar" MaxLength="50" />
+    <Property Name="turu" Type="varchar" MaxLength="50" />
+    <Property Name="rafno" Type="nchar" MaxLength="10" />
+    <Property Name="cevirmen" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="kullanicilar">
+    <Key>
+      <PropertyRef Name="tc" />
+    </Key>
+    <Property Name="rol" Type="varchar" MaxLength="50" />
+    <Property Name="ad_soyad" Type="varchar" MaxLength="50" />
+    <Property Name="sifre" Type="varchar" MaxLength="50" />
+    <Property Name="eposta" Type="varchar" MaxLength="50" />
+    <Property Name="tc" Type="bigint" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'deneme.dbo.rez' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="rez">
+          <Property Name="kitap_adi" Type="varchar" MaxLength="50" />
+          <Property Name="isbn_nu" Type="bigint" />
+          <Property Name="alıcı" Type="varchar" MaxLength="50" />
+        </EntityType>-->
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="uyeler">
+    <Key>
+      <PropertyRef Name="tc" />
+    </Key>
+    <Property Name="tc" Type="bigint" Nullable="false" />
+    <Property Name="ad_soyad" Type="varchar" MaxLength="50" />
+    <Property Name="d_tarihi" Type="date" />
+    <Property Name="cinsiyet" Type="varchar" MaxLength="50" />
+    <Property Name="tel" Type="bigint" />
+    <Property Name="adres" Type="varchar" MaxLength="50" />
+    <Property Name="eposta" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_emanetler_kitaplar">
+    <End Role="kitaplar" Type="Self.kitaplar" Multiplicity="1" />
+    <End Role="emanetler" Type="Self.emanetler" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="kitaplar">
+        <PropertyRef Name="isbn" />
+      </Principal>
+      <Dependent Role="emanetler">
+        <PropertyRef Name="isbn_no" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_emanetler_uyeler">
+    <End Role="uyeler" Type="Self.uyeler" Multiplicity="0..1" />
+    <End Role="emanetler" Type="Self.emanetler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="uyeler">
+        <PropertyRef Name="tc" />
+      </Principal>
+      <Dependent Role="emanetler">
+        <PropertyRef Name="alici_tc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="denemeModelConnectionDbStoreContainer">
+    <EntitySet Name="emanetler" EntityType="Self.emanetler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="kitaplar" EntityType="Self.kitaplar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="kullanicilar" EntityType="Self.kullanicilar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="uyeler" EntityType="Self.uyeler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="dergiler" EntityType="Self.dergiler" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [dergiler].[issn] AS [issn], 
+    [dergiler].[dergi_adi] AS [dergi_adi], 
+    [dergiler].[dili] AS [dili], 
+    [dergiler].[yayin_tarihi] AS [yayin_tarihi]
+    FROM [dbo].[dergiler] AS [dergiler]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_emanetler_kitaplar" Association="Self.FK_emanetler_kitaplar">
+      <End Role="kitaplar" EntitySet="kitaplar" />
+      <End Role="emanetler" EntitySet="emanetler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_emanetler_uyeler" Association="Self.FK_emanetler_uyeler">
+      <End Role="uyeler" EntitySet="uyeler" />
+      <End Role="emanetler" EntitySet="emanetler" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

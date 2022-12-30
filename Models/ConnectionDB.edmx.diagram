@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5684a663417d4613b76a71e153b54620" Name="Diagram1">
+        <EntityTypeShape EntityType="denemeModelConnectionDb.emanetler" Width="1.5" PointX="3.375" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="denemeModelConnectionDb.kitaplar" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="denemeModelConnectionDb.kullanicilar" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="denemeModelConnectionDb.sysdiagrams" Width="1.5" PointX="3.375" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="denemeModelConnectionDb.uyeler" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="denemeModelConnectionDb.dergiler" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="denemeModelConnectionDb.FK_emanetler_kitaplar" ManuallyRouted="false" />
+        <AssociationConnector Association="denemeModelConnectionDb.FK_emanetler_uyeler" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="denemeModelConnectionDb.DergiRez" Width="1.5" PointX="11" PointY="2.125" />
+        <EntityTypeShape EntityType="denemeModelConnectionDb.EmanetDergiler" Width="1.5" PointX="9" PointY="5.75" />
+        <EntityTypeShape EntityType="denemeModelConnectionDb.EmanetKitaplar" Width="1.5" PointX="6" PointY="7.125" />
+        <EntityTypeShape EntityType="denemeModelConnectionDb.KitapRez" Width="1.5" PointX="8" PointY="1.625" />
+        <EntityTypeShape EntityType="denemeModelConnectionDb.turler" Width="1.5" PointX="0.75" PointY="9.75" />
+        <AssociationConnector Association="denemeModelConnectionDb.FK_DergiRez_dergiler" />
+        <AssociationConnector Association="denemeModelConnectionDb.FK_EmanetDergiler_dergiler" />
+        <AssociationConnector Association="denemeModelConnectionDb.FK_DergiRez_kullanicilar" />
+        <AssociationConnector Association="denemeModelConnectionDb.FK_EmanetDergiler_uyeler" />
+        <AssociationConnector Association="denemeModelConnectionDb.FK_emanetler_kitaplar1" />
+        <AssociationConnector Association="denemeModelConnectionDb.FK_emanetler_uyeler1" />
+        <AssociationConnector Association="denemeModelConnectionDb.FK_kitaplar_turler" />
+        <AssociationConnector Association="denemeModelConnectionDb.FK_KitapRez_kitaplar" />
+        <AssociationConnector Association="denemeModelConnectionDb.FK_KitapRez_kullanicilar" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

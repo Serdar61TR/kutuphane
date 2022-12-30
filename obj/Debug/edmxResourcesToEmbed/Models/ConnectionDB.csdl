@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="denemeModelConnectionDb" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="emanetler">
+    <Key>
+      <PropertyRef Name="isbn_no" />
+    </Key>
+    <Property Name="alici" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="alici_tc" Type="Int64" />
+    <Property Name="alici_tel" Type="Int64" />
+    <Property Name="kitap" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="isbn_no" Type="Int64" Nullable="false" />
+    <Property Name="yazari" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="cevirmen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="kategori" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="alim_tarihi" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="kitaplar" Relationship="Self.FK_emanetler_kitaplar" FromRole="emanetler" ToRole="kitaplar" />
+    <NavigationProperty Name="uyeler" Relationship="Self.FK_emanetler_uyeler" FromRole="emanetler" ToRole="uyeler" />
+  </EntityType>
+  <EntityType Name="kitaplar">
+    <Key>
+      <PropertyRef Name="isbn" />
+    </Key>
+    <Property Name="kitap_adi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="yayin_evi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="isbn" Type="Int64" Nullable="false" />
+    <Property Name="yazar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="turu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="rafno" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="cevirmen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="emanetler" Relationship="Self.FK_emanetler_kitaplar" FromRole="kitaplar" ToRole="emanetler" />
+  </EntityType>
+  <EntityType Name="kullanicilar">
+    <Key>
+      <PropertyRef Name="tc" />
+    </Key>
+    <Property Name="rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ad_soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="eposta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="tc" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="uyeler">
+    <Key>
+      <PropertyRef Name="tc" />
+    </Key>
+    <Property Name="tc" Type="Int64" Nullable="false" />
+    <Property Name="ad_soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="d_tarihi" Type="DateTime" Precision="0" />
+    <Property Name="cinsiyet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="tel" Type="Int64" />
+    <Property Name="adres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="eposta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="emanetler" Relationship="Self.FK_emanetler_uyeler" FromRole="uyeler" ToRole="emanetler" />
+  </EntityType>
+  <EntityType Name="dergiler">
+    <Key>
+      <PropertyRef Name="issn" />
+    </Key>
+    <Property Name="issn" Type="Int64" Nullable="false" />
+    <Property Name="dergi_adi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dili" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="yayin_tarihi" Type="DateTime" Precision="0" />
+  </EntityType>
+  <Association Name="FK_emanetler_kitaplar">
+    <End Role="kitaplar" Type="Self.kitaplar" Multiplicity="1" />
+    <End Role="emanetler" Type="Self.emanetler" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="kitaplar">
+        <PropertyRef Name="isbn" />
+      </Principal>
+      <Dependent Role="emanetler">
+        <PropertyRef Name="isbn_no" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_emanetler_uyeler">
+    <End Role="uyeler" Type="Self.uyeler" Multiplicity="0..1" />
+    <End Role="emanetler" Type="Self.emanetler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="uyeler">
+        <PropertyRef Name="tc" />
+      </Principal>
+      <Dependent Role="emanetler">
+        <PropertyRef Name="alici_tc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="denemeEntitiesConnectionDb" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="emanetler" EntityType="Self.emanetler" />
+    <EntitySet Name="kitaplar" EntityType="Self.kitaplar" />
+    <EntitySet Name="kullanicilar" EntityType="Self.kullanicilar" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="uyeler" EntityType="Self.uyeler" />
+    <EntitySet Name="dergiler" EntityType="Self.dergiler" />
+    <AssociationSet Name="FK_emanetler_kitaplar" Association="Self.FK_emanetler_kitaplar">
+      <End Role="kitaplar" EntitySet="kitaplar" />
+      <End Role="emanetler" EntitySet="emanetler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_emanetler_uyeler" Association="Self.FK_emanetler_uyeler">
+      <End Role="uyeler" EntitySet="uyeler" />
+      <End Role="emanetler" EntitySet="emanetler" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
